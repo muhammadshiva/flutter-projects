@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart';
@@ -25,6 +26,7 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
   final CookieManager cookieManager = CookieManager();
+  final cookieWebManager = WebviewCookieManager();
 
   Future<void> _onListCookies(WebViewController controller) async {
     final String cookies =
@@ -63,17 +65,20 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  // Future<void> _onSetCookie(WebViewController controller) async {
-  //   await cookieManager.setCookies(
-  //     const WebViewCookie(name: 'foo', value: 'bar', domain: 'flutter.dev'),
-  //   );
-  //   if (!mounted) return;
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     const SnackBar(
-  //       content: Text('Custom cookie is set.'),
-  //     ),
-  //   );
-  // }
+  Future<void> _onSetCookie(WebViewController controller) async {
+    await cookieWebManager.setCookies([
+      Cookie('cookieName', 'cookieValue')
+        ..domain = 'youtube.com'
+        ..expires = DateTime.now().add(Duration(days: 10))
+        ..httpOnly = false
+    ]);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Custom cookie is set.'),
+      ),
+    );
+  }
 
   Future<void> _onRemoveCookie(WebViewController controller) async {
     await controller.evaluateJavascript(
@@ -134,9 +139,9 @@ req.send();''');
               case _MenuOptions.addCookie:
                 await _onAddCookie(controller.data);
                 break;
-              // case _MenuOptions.setCookie:
-              //   await _onSetCookie(controller.data);
-              //   break;
+              case _MenuOptions.setCookie:
+                await _onSetCookie(controller.data);
+                break;
               case _MenuOptions.removeCookie:
                 await _onRemoveCookie(controller.data);
                 break;
