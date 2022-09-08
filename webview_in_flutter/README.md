@@ -16,6 +16,6 @@
  
  - Menjalankan Aplikasi 
  
- ![screenshot](images/01.png)
+| ![screenshot](images/01.png) | Picture |
       
 
