@@ -57,6 +57,7 @@ class _WebViewStackState extends State<WebViewStack> {
           },
           // ... to here.
           javascriptMode: JavascriptMode.unrestricted,
+          javascriptChannels: _createJavascriptChannels(context),
         ),
         if (loadingPercentage < 100)
           LinearProgressIndicator(
@@ -65,4 +66,18 @@ class _WebViewStackState extends State<WebViewStack> {
       ],
     );
   }
+
+  // Add from here ...
+  Set<JavascriptChannel> _createJavascriptChannels(BuildContext context) {
+    return {
+      JavascriptChannel(
+        name: 'SnackBar',
+        onMessageReceived: (message) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(message.message)));
+        },
+      ),
+    };
+  }
+  // ... to here.
 }
