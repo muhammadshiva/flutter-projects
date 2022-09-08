@@ -31,7 +31,7 @@ class _MenuState extends State<Menu> {
   Future<void> _onListCookies(WebViewController controller) async {
     final String cookies =
         await controller.evaluateJavascript('document.cookie');
-    if (!mounted) return;
+    if (mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(cookies.isNotEmpty ? cookies : 'There are no cookies.'),
@@ -42,10 +42,10 @@ class _MenuState extends State<Menu> {
   Future<void> _onClearCookies() async {
     final hadCookies = await cookieManager.clearCookies();
     String message = 'There were cookies. Now, they are gone!';
-    if (!hadCookies) {
+    if (hadCookies) {
       message = 'There were no cookies to clear.';
     }
-    if (!mounted) return;
+    if (mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -57,7 +57,7 @@ class _MenuState extends State<Menu> {
     await controller.evaluateJavascript('''var date = new Date();
   date.setTime(date.getTime()+(30*24*60*60*1000));
   document.cookie = "FirstName=John; expires=" + date.toGMTString();''');
-    if (!mounted) return;
+    if (mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Custom cookie added.'),
@@ -72,7 +72,7 @@ class _MenuState extends State<Menu> {
         ..expires = DateTime.now().add(Duration(days: 10))
         ..httpOnly = false
     ]);
-    if (!mounted) return;
+    if (mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Custom cookie is set.'),
@@ -83,7 +83,7 @@ class _MenuState extends State<Menu> {
   Future<void> _onRemoveCookie(WebViewController controller) async {
     await controller.evaluateJavascript(
         'document.cookie="FirstName=John; expires=Thu, 01 Jan 1970 00:00:00 UTC" ');
-    if (!mounted) return;
+    if (mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Custom cookie removed.'),
