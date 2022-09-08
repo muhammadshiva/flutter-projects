@@ -1,16 +1,21 @@
-# webview_in_flutter
+# Flutter Webview
 
-A new Flutter project.
+## Langkah Praktikum
 
-## Getting Started
+**A. Getting Started**
 
-This project is a starting point for a Flutter application.
+- Menambahkan dependency webview menggunakan perintah `flutter pub add webview_flutter`
 
-A few resources to get you started if this is your first Flutter project:
+- Mengubah minSDK android versi 20
+    
+ **B. Adding WebView widget to the Flutter App**
+ 
+ - Menambahkan Webview pada aplikasi
+ 
+ - Menambahkan Hybrid Composition
+ 
+ - Menjalankan Aplikasi 
+ 
+| ![screenshot](images/01.png) | Picture |
+      
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
