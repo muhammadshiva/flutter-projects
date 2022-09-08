@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_in_flutter/web_view_stack.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -31,9 +32,10 @@ class _WebViewAppState extends State<WebViewApp> {
       appBar: AppBar(
         title: const Text('Flutter Webview'),
       ),
-      body: const WebView(
-        initialUrl: 'https://flutter.dev',
-      ),
+      body: const WebViewStack(),
+      // body: const WebView(
+      //   initialUrl: 'https://flutter.dev',
+      // ),
     );
   }
 }
